@@ -1,0 +1,308 @@
+.psb-debug {
+  --psb-debug-font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --psb-debug-mono-font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --psb-debug-z-index: 2147483000;
+  --psb-debug-offset-x: 16px;
+  --psb-debug-offset-y: 16px;
+  --psb-debug-panel-width: min(980px, calc(100vw - 32px));
+  --psb-debug-panel-height: min(680px, calc(100vh - 32px));
+  --psb-debug-radius: 8px;
+  --psb-debug-control-radius: 6px;
+  --psb-debug-text: #172033;
+  --psb-debug-muted: #64748b;
+  --psb-debug-border: #d8dee9;
+  --psb-debug-soft-border: #e6eaf0;
+  --psb-debug-row-border: #edf1f7;
+  --psb-debug-control-border: #cbd5e1;
+  --psb-debug-panel-bg: #ffffff;
+  --psb-debug-header-bg: #f8fafc;
+  --psb-debug-nav-bg: #fbfdff;
+  --psb-debug-nav-item-text: #334155;
+  --psb-debug-table-header-text: #475569;
+  --psb-debug-control-bg: #ffffff;
+  --psb-debug-control-text: #172033;
+  --psb-debug-launcher-bg: #172033;
+  --psb-debug-launcher-text: #ffffff;
+  --psb-debug-accent-bg: #e7efff;
+  --psb-debug-accent-text: #12316f;
+  --psb-debug-danger-bg: #fff1f2;
+  --psb-debug-danger-border: #fecaca;
+  --psb-debug-danger-text: #991b1b;
+  --psb-debug-panel-shadow: 0 24px 70px rgba(15, 23, 42, 0.26);
+  --psb-debug-launcher-shadow: 0 12px 30px rgba(15, 23, 42, 0.28);
+
+  position: fixed;
+  z-index: var(--psb-debug-z-index);
+  color: var(--psb-debug-text);
+  font-family: var(--psb-debug-font-family);
+  font-size: 13px;
+  line-height: 1.35;
+  box-sizing: border-box;
+}
+
+.psb-debug *,
+.psb-debug *::before,
+.psb-debug *::after {
+  box-sizing: inherit;
+}
+
+.psb-debug--bottom-right {
+  right: var(--psb-debug-offset-x);
+  bottom: var(--psb-debug-offset-y);
+}
+
+.psb-debug--bottom-left {
+  left: var(--psb-debug-offset-x);
+  bottom: var(--psb-debug-offset-y);
+}
+
+.psb-debug--top-right {
+  right: var(--psb-debug-offset-x);
+  top: var(--psb-debug-offset-y);
+}
+
+.psb-debug--top-left {
+  left: var(--psb-debug-offset-x);
+  top: var(--psb-debug-offset-y);
+}
+
+.psb-debug__launcher {
+  min-width: 46px;
+  height: 46px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--psb-debug-launcher-bg);
+  color: var(--psb-debug-launcher-text);
+  box-shadow: var(--psb-debug-launcher-shadow);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.psb-debug__panel {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  width: var(--psb-debug-panel-width);
+  height: var(--psb-debug-panel-height);
+  overflow: hidden;
+  border: 1px solid var(--psb-debug-border);
+  border-radius: var(--psb-debug-radius);
+  background: var(--psb-debug-panel-bg);
+  box-shadow: var(--psb-debug-panel-shadow);
+}
+
+.psb-debug__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--psb-debug-soft-border);
+  background: var(--psb-debug-header-bg);
+}
+
+.psb-debug__title {
+  margin: 0;
+  color: var(--psb-debug-text);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.psb-debug__trace-id {
+  margin-top: 2px;
+  font-size: 12px;
+}
+
+.psb-debug__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.psb-debug__action {
+  padding: 6px 10px;
+  border: 1px solid var(--psb-debug-control-border);
+  border-radius: var(--psb-debug-control-radius);
+  background: var(--psb-debug-control-bg);
+  color: var(--psb-debug-control-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.psb-debug__summary {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  border-bottom: 1px solid var(--psb-debug-soft-border);
+}
+
+.psb-debug__metric {
+  min-width: 0;
+  padding: 10px 12px;
+  border-right: 1px solid var(--psb-debug-soft-border);
+}
+
+.psb-debug__metric:last-child {
+  border-right: 0;
+}
+
+.psb-debug__metric-label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--psb-debug-muted);
+  font-size: 11px;
+}
+
+.psb-debug__metric-value {
+  display: block;
+  overflow: hidden;
+  color: var(--psb-debug-text);
+  font-size: 15px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.psb-debug__body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  min-height: 0;
+}
+
+.psb-debug__nav {
+  overflow: auto;
+  padding: 10px;
+  border-right: 1px solid var(--psb-debug-soft-border);
+  background: var(--psb-debug-nav-bg);
+}
+
+.psb-debug__nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  margin: 0 0 4px;
+  padding: 8px 9px;
+  border: 0;
+  border-radius: var(--psb-debug-control-radius);
+  background: transparent;
+  color: var(--psb-debug-nav-item-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+}
+
+.psb-debug__nav-item--active {
+  background: var(--psb-debug-accent-bg);
+  color: var(--psb-debug-accent-text);
+  font-weight: 700;
+}
+
+.psb-debug__nav-count {
+  color: inherit;
+  font-size: 12px;
+  opacity: 0.78;
+}
+
+.psb-debug__content {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
+  padding: 14px;
+}
+
+.psb-debug__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.psb-debug__table-header {
+  position: sticky;
+  top: 0;
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--psb-debug-border);
+  background: var(--psb-debug-header-bg);
+  color: var(--psb-debug-table-header-text);
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.psb-debug__table-cell {
+  padding: 7px 8px;
+  border-bottom: 1px solid var(--psb-debug-row-border);
+  vertical-align: top;
+}
+
+.psb-debug__code {
+  font-family: var(--psb-debug-mono-font-family);
+  font-size: 12px;
+}
+
+.psb-debug__muted {
+  color: var(--psb-debug-muted);
+}
+
+.psb-debug__error {
+  padding: 12px;
+  border: 1px solid var(--psb-debug-danger-border);
+  border-radius: var(--psb-debug-control-radius);
+  background: var(--psb-debug-danger-bg);
+  color: var(--psb-debug-danger-text);
+  font-size: 13px;
+}
+
+.psb-debug__raw {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 760px) {
+  .psb-debug {
+    --psb-debug-offset-x: 8px;
+    --psb-debug-offset-y: 8px;
+    --psb-debug-panel-width: calc(100vw - 16px);
+    --psb-debug-panel-height: calc(100vh - 16px);
+  }
+
+  .psb-debug__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .psb-debug__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .psb-debug__metric {
+    border-bottom: 1px solid var(--psb-debug-soft-border);
+  }
+
+  .psb-debug__body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .psb-debug__nav {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--psb-debug-soft-border);
+  }
+
+  .psb-debug__nav-item {
+    flex: 0 0 auto;
+    width: auto;
+    margin-bottom: 0;
+  }
+}
